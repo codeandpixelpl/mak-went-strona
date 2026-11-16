@@ -341,7 +341,7 @@ body.menu-otw .menu-p{background:#fff}
 
 /* ── komponent: lista_ciemna (zakres usługi na granacie) ── */
 .dwie{display:grid;grid-template-columns:.8fr 1.2fr;gap:72px;align-items:start}
-.dwie .gl{margin-bottom:0;position:sticky;top:calc(var(--naw-h-zwin) + 90px)}
+.dwie .gl{margin-bottom:0}
 .lista-kol{columns:2;column-gap:40px}
 .lista-kol li{break-inside:avoid}
 .sekcja--ciemna .lista-ok li{border-color:var(--granat-3)}
@@ -521,7 +521,6 @@ body.menu-otw .menu-p{background:#fff}
   .serwis .karta,.wycena .siatka{grid-template-columns:1fr}
   .serwis .fot{min-height:340px}
   .wstep,.dwie,.bloki>div{grid-template-columns:1fr;gap:32px}
-  .dwie .gl{position:static}
   .dane{grid-template-columns:1fr 1fr}
   .dane>div,.dane>.osoba{grid-column:span 1}
   .dane>.adres{grid-column:span 2}
