@@ -31,6 +31,11 @@ h3{font-family:var(--font-naglowek);font-weight:700;line-height:1.05}
 /* komponent: sekcja (tła) */
 .sekcja{padding:var(--sekcja-y) 0}
 .sekcja--ciemna{background:var(--granat);color:#fff}
+/* granatowa sekcja ze zdjęciem realizacji: zdjęcie w szarości pod nakładką, mocniejszą po stronie tekstu */
+.sekcja--foto{position:relative;isolation:isolate;overflow:hidden}
+.sek-tlo{position:absolute;inset:0;z-index:-1}
+.sek-tlo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:.5}
+.sek-tlo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--granat) 80%,transparent) 0%,color-mix(in srgb,var(--granat) 90%,transparent) 50%,color-mix(in srgb,var(--granat) 94%,transparent) 100%)}
 .sekcja--szara{background:var(--tlo-szare)}
 .sekcja--ciasna{padding-top:calc(var(--sekcja-y)*.6)}
 
@@ -110,7 +115,9 @@ body.menu-otw .menu-p{background:#fff}
 .hero h1 em{font-style:normal;color:var(--niebieski-jasny)}
 .hero .lead{color:var(--tekst-na-ciemnym-2)}
 .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
-.zauf{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);font-weight:600;font-size:15px;max-width:640px}
+.zauf{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);font-weight:600;font-size:15px;max-width:none}
+.zauf:not(.zauf--seg){flex-wrap:nowrap}
+.zauf li{white-space:nowrap}
 .zauf li{display:flex;align-items:center;gap:8px}
 .zauf .i{flex:none;width:22px;height:22px;color:var(--niebieski-jasny);stroke-width:1.7}
 .zauf{gap:10px 30px}
@@ -260,6 +267,7 @@ body.menu-otw .menu-p{background:#fff}
 .galeria--mozaika figure.duza figcaption{font-size:18px;left:20px;bottom:18px}
 .galeria-dol{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:34px}
 .galeria-licznik{color:var(--tekst-drugi);font-size:15px}
+.gl-akcja{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .galeria-dol .brak{flex:1 1 100%;margin-top:22px}
 
 /* lightbox */
@@ -310,6 +318,8 @@ body.menu-otw .menu-p{background:#fff}
 
 /* ── komponent: podmenu (przypięte na stronach usług) ── */
 .podmenu{position:sticky;top:var(--naw-h-zwin);z-index:30;background:#fff;border-bottom:1px solid var(--linia)}
+/* szybki formularz to karta nad treścią: menu sekcji zaczyna się dopiero pod nią, z linią u góry */
+.szybka-wrap+.podmenu{margin-top:48px;border-top:1px solid var(--linia)}
 .podmenu .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 .podmenu .wrap::-webkit-scrollbar{display:none}
 .podmenu a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:56px;padding:0 16px;font-family:var(--font-naglowek);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:15px;color:var(--tekst-drugi);border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
@@ -346,6 +356,10 @@ body.menu-otw .menu-p{background:#fff}
 .wiersze .nr{grid-row:span 2;font-family:var(--font-naglowek);font-weight:700;font-size:20px;color:var(--czerwony)}
 .wiersze h3{font-size:var(--h3);margin-bottom:10px}
 .wiersze p{color:var(--tekst-drugi)}
+.wiersze--ik>div{grid-template-columns:64px 1fr}
+.wiersze--ik .wi-ik{grid-row:span 3;display:grid;place-items:center;width:52px;height:52px;background:var(--tlo-szare);color:var(--niebieski)}
+.wiersze--ik .wi-ik .i{width:28px;height:28px;stroke-width:1.6}
+.wiersze--ik .nr{grid-row:auto;font-size:15px;margin-bottom:4px}
 
 /* ── komponent: bloki (pytanie i odpowiedź jako dwa akapity) ── */
 .bloki>div{display:grid;grid-template-columns:.8fr 1.2fr;gap:72px;padding:40px 0;border-top:1px solid var(--linia-2)}
@@ -365,7 +379,7 @@ body.menu-otw .menu-p{background:#fff}
 
 /* ── komponent: wycena (pełny formularz) ── */
 .wycena{padding:var(--sekcja-y) 0}
-.sekcja:not([class*="sekcja--"])+.wycena{padding-top:0}
+.sekcja:not(.sekcja--ciemna):not(.sekcja--szara)+.wycena{padding-top:0}
 .wycena .siatka{display:grid;grid-template-columns:.78fr 1.22fr;border:1px solid var(--linia);box-shadow:0 20px 50px var(--cien-kolor)}
 .info{position:relative;background:var(--granat);color:#fff;padding:52px 44px;display:flex;flex-direction:column;justify-content:space-between;gap:48px;overflow:hidden}
 .info>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.16;mix-blend-mode:luminosity}
@@ -391,10 +405,12 @@ body.menu-otw .menu-p{background:#fff}
 .chipy input{position:absolute;opacity:0;width:1px;height:1px}
 .chipy span{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 16px;border:1px solid var(--linia-2);border-radius:var(--promien);font-weight:500;font-size:15px;cursor:pointer;transition:all .2s;background:#fff}
 .chipy span .i{width:17px;height:17px;color:var(--tekst-drugi)}
-.chipy input[type=checkbox]+span .i{width:0;margin-right:-8px;opacity:0;transition:all .2s;stroke-width:2.6}
+/* zaznaczenie w kafelku wielokrotnego wyboru: plakietka w rogu poza układem, kafelki nie zmieniają szerokości */
+.chipy input[type=checkbox]+span .i{position:absolute;top:-8px;right:-8px;width:20px;height:20px;padding:4px;border-radius:50%;background:var(--niebieski);box-shadow:0 0 0 2px #fff;stroke-width:3.2;opacity:0;transform:scale(.5);transition:opacity .2s,transform .2s}
 .chipy span:hover{border-color:var(--granat)}
 .chipy input:checked+span{background:var(--granat);border-color:var(--granat);color:#fff}
 .chipy input:checked+span .i{color:#fff;opacity:1;width:17px;margin-right:0}
+.chipy input[type=checkbox]:checked+span .i{width:20px;transform:none}
 .chipy input:focus-visible+span{outline:3px solid var(--niebieski);outline-offset:2px}
 .krok.zle .chipy span{border-color:var(--czerwony)}
 .krok .blad{display:block;margin-top:10px}
@@ -473,6 +489,7 @@ body.menu-otw .menu-p{background:#fff}
 }
 @media (max-width:1000px){
   .zauf--seg{width:auto}
+  .zauf:not(.zauf--seg){flex-wrap:wrap}
   .zauf--seg li{padding-right:18px;margin-right:18px}
   .linki,.gora .gora-mail,.gora .gora-adres{display:none}
   .ikona{display:inline-flex}
@@ -531,6 +548,10 @@ body.menu-otw .menu-p{background:#fff}
   .lead{font-size:17px}
   .hero-cta .btn{flex:1 1 100%}
   .zauf{flex-direction:column;gap:10px;margin-top:28px}
+  .zauf li{white-space:normal}
+  .szybka-wrap+.podmenu{margin-top:0;border-top:0}
+  .gl-akcja{width:100%}
+  .gl-akcja .btn{width:100%}
   .zauf--seg{grid-template-columns:1fr;gap:14px;width:auto}
   .zauf--seg li{border:0;margin:0;padding:0}
   .szybka{grid-template-columns:1fr;padding:22px 18px 24px;margin-top:-48px;gap:16px}
@@ -590,6 +611,8 @@ body.menu-otw .menu-p{background:#fff}
   .lista-kol{columns:1}
   .wiersze{grid-template-columns:1fr}
   .wiersze>div,.wiersze>div:nth-child(odd),.wiersze>div:nth-child(even){padding:26px 0;border-right:0;grid-template-columns:44px 1fr}
+  .wiersze--ik>div,.wiersze--ik>div:nth-child(odd),.wiersze--ik>div:nth-child(even){grid-template-columns:60px 1fr}
+  .wiersze--ik .wi-ik{width:46px;height:46px}
   .bloki h3{font-size:28px}
   .bloki>div{gap:14px;padding:30px 0}
   .faq summary{font-size:21px;min-height:68px}
