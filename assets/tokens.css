@@ -1,0 +1,90 @@
+/* Mak-Went · tokeny projektu (kierunek C · Ekspert)
+   Jedno źródło wartości. Komponenty w style.css czytają tylko stąd.
+   Po etapie 5 plik przechodzi do 04 - Styleguide/tokens.css. */
+:root{
+  /* kolory z logo (wizytówka, Figma 0VrNnz7lPbaZQQmqcGLawz): tylko znak marki i pasek gradientu,
+     nie tło przycisków (czerwień z logo ma z białym tekstem kontrast 4,18, poniżej AA) */
+  --marka-niebieski:#0505fb;
+  --marka-czerwony:#f80707;
+  --marka-gradient:linear-gradient(90deg,var(--marka-niebieski),var(--marka-czerwony));
+
+  /* kolory interfejsu w odcieniach logo (niebieski 234°, czerwień 0°, granat 225°) */
+  --granat:#0b1638;
+  --granat-2:#121f4b;
+  --granat-3:#22306a;
+  --czerwony:#e00b0b;          /* przyciski, akcenty; biały tekst 4,97 */
+  --czerwony-ciemny:#b60808;   /* hover przycisku, błąd */
+  --czerwony-jasny:#ff6b6b;    /* ikony i akcenty na granacie; 6,38 */
+  --niebieski:#1428e6;         /* ikony, focus, linki na bieli; 8,48 */
+  --niebieski-sredni:#5966e8;  /* obrysy numerów na granacie */
+  --niebieski-jasny:#a6adff;   /* wyróżnienie w H1 i ikony na granacie; 8,47 */
+
+  /* tła i linie */
+  --tlo:#fff;
+  --tlo-szare:#f2f4f8;
+  --tlo-szare-2:#e7eaf2;
+  --linia:#dce0ea;
+  --linia-2:#c7cddb;
+  --linia-3:#98a0b7;           /* obrys pola po najechaniu */
+  --linia-ciemna:var(--granat-3);
+
+  /* tekst */
+  --tekst:var(--granat);
+  --tekst-drugi:#565f78;
+  --tekst-trzeci:#848ea6;      /* nieaktywne nazwy usług, duży krój: 3,2 na bieli (AA dla dużego tekstu) */
+  --tekst-na-ciemnym:#aeb5cc;
+  --tekst-na-ciemnym-2:#cfd4e4; /* lead i akapity na granacie */
+
+  /* stany */
+  --sukces:#1d8a4b;
+  --sukces-tlo:#e7f5ec;
+  --blad:var(--czerwony-ciemny);
+
+  /* przezroczystości z granatu i akcentów */
+  --cien-kolor:color-mix(in srgb,var(--granat) 8%,transparent);
+  --focus-pole:0 0 0 3px color-mix(in srgb,var(--niebieski) 16%,transparent);
+  --focus-blad:0 0 0 3px color-mix(in srgb,var(--czerwony) 14%,transparent);
+  --zaslona:color-mix(in srgb,var(--granat) 94%,black);
+
+  /* nakładka na zdjęcie w tle hero: granat z lewej pod tekstem, błękit marki z prawej */
+  --hero-nakladka:linear-gradient(90deg,color-mix(in srgb,var(--granat) 90%,transparent) 0%,color-mix(in srgb,var(--granat) 78%,transparent) 34%,color-mix(in srgb,var(--granat-3) 38%,transparent) 64%,color-mix(in srgb,var(--niebieski) 12%,transparent) 100%);
+  --hero-nakladka-m:linear-gradient(180deg,color-mix(in srgb,var(--granat) 55%,transparent) 0%,color-mix(in srgb,var(--granat) 86%,transparent) 55%,color-mix(in srgb,var(--granat) 94%,transparent) 100%);
+  /* telefon, hero strony głównej i usług: zdjęcie pasem nad tekstem, dół wtapia się w granat */
+  --hero-pas-m:linear-gradient(180deg,color-mix(in srgb,var(--granat) 20%,transparent) 0%,color-mix(in srgb,var(--granat) 30%,transparent) 40%,color-mix(in srgb,var(--granat) 70%,transparent) 68%,color-mix(in srgb,var(--granat) 94%,transparent) 88%,var(--granat) 100%);
+
+  /* kroje */
+  --font-tekst:Barlow,system-ui,sans-serif;
+  --font-naglowek:"Barlow Condensed",Barlow,sans-serif;
+
+  /* skala typografii */
+  --h1:clamp(40px,4.6vw,70px);
+  --h1-maly:clamp(38px,4vw,60px);
+  --h2:clamp(36px,4.2vw,62px);
+  --h3:28px;          /* nagłówek karty głównej */
+  --h4:22px;          /* nagłówek małej karty (dowody, dane kontaktowe) */
+  --lead:19px;
+  --tekst-rozmiar:17px;
+  --maly:14px;
+
+  /* układ */
+  --kontener:1240px;
+  --margines:24px;
+  --margines-m:16px;
+  --sekcja-y:120px;
+  --sekcja-y-m:80px;
+  --naw-h:84px;
+  --naw-h-zwin:68px;
+
+  /* kształty i cienie */
+  --promien:2px;
+  --cien:0 24px 60px color-mix(in srgb,var(--granat) 14%,transparent);
+  --cien-maly:0 14px 40px var(--cien-kolor);
+
+  /* elementy */
+  --przycisk-h:54px;
+  --pole-h:52px;
+  --cel-dotyk:44px;
+  --ruch:cubic-bezier(.2,.7,.2,1);
+}
+@media (max-width:1000px){:root{--naw-h:72px;--naw-h-zwin:64px}}
+@media (max-width:640px){:root{--h3:24px;--h4:20px}}
